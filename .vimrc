@@ -1,6 +1,7 @@
 call plug#begin()
 Plug 'itchyny/lightline.vim'
 Plug 'rakr/vim-one'
+Plug 'ycm-core/YouCompleteMe'
 call plug#end()
 
 autocmd VimEnter *
