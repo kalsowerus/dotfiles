@@ -1,5 +1,9 @@
 #!/bin/sh
 
+sudo apt install jq
+sudo apt install fzf
+sudo apt install xclip
+
 dir=$(dirname "$0")
 
 link() {
