@@ -4,10 +4,10 @@ sudo apt install jq
 sudo apt install fzf
 sudo apt install xclip
 
-dir=$(dirname "$0")
+dir=$(realpath $(dirname "$0"))
 
 link() {
-	if [ -e "$HOME/$1" ]; then
+	if [ -f "$HOME/$1" ] && [ ! -L "$HOME/$1" ]; then
 		echo -n "$1 exists. Overwrite? (y/N) "
 		read 'reply'
 
