@@ -1,5 +1,11 @@
+dir=$(dirname "$0")
+
+# Manual installations/updates
+$dir/install.sh antigen "$HOME/.zsh/antigen/antigen.zsh" 'zsh-users/antigen' 'bin/antigen.zsh'
+$dir/install.sh vim-plug "$HOME/.vim/autoload/plug.vim" 'junegunn/vim-plug' 'plug.vim'
+
 # Antigen stuff
-source /usr/share/zsh-antigen/antigen.zsh
+source "$HOME/.zsh/antigen/antigen.zsh"
 
 antigen use oh-my-zsh
 
