@@ -9,6 +9,7 @@ autocmd VimEnter *
   \| endif
 
 syntax on
+let g:lightline={'colorscheme':'one'}
 colorscheme one
 set background=dark
 hi Normal guibg=NONE ctermbg=NONE
