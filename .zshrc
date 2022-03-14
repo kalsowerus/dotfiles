@@ -39,3 +39,5 @@ antigen apply
 
 setopt auto_cd
 
+alias k='k -Ah --group-directories-first'
+
