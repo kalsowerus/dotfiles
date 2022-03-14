@@ -1,5 +1,6 @@
 call plug#begin()
-Plug 'doums/darcula'
+Plug 'itchyny/lightline.vim'
+Plug 'rakr/vim-one'
 call plug#end()
 
 autocmd VimEnter *
@@ -8,11 +9,13 @@ autocmd VimEnter *
   \| endif
 
 syntax on
-colorscheme darcula
+colorscheme one
 set background=dark
 hi Normal guibg=NONE ctermbg=NONE
 set number
 set title
+set laststatus=2
+set noshowmode
 
 set mouse=a
 
