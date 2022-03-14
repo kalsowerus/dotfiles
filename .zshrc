@@ -27,6 +27,7 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle Aloxaf/fzf-tab
 antigen bundle unixorn/autoupdate-antigen.zshplugin
+antigen bundle kalsowerus/k
 
 antigen bundle kalsowerus/zsh-bitwarden@develop
 
