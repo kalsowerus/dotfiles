@@ -22,11 +22,5 @@ link() {
 link .gitconfig
 link .lesskey
 link .vimrc
-
-# Linking .zshrc does not work with nvm
-#link .zshrc
-
-if [ ! -e "$HOME/zshrc" ]; then
-    echo 'source "$HOME/dotfiles/.zshrc"' > "$HOME/.zshrc"
-fi
+link .zshrc
 
