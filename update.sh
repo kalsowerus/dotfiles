@@ -2,6 +2,6 @@
 
 dir=$(realpath $(dirname "$0"))
 
-git pull "$dir"
+git -C "$dir" pull
 $dir/init.sh
 
