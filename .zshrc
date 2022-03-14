@@ -3,6 +3,9 @@ dir=$(dirname "$0")
 # Manual installations/updates
 $dir/install.sh antigen "$HOME/.zsh/antigen/antigen.zsh" 'zsh-users/antigen' 'bin/antigen.zsh'
 $dir/install.sh vim-plug "$HOME/.vim/autoload/plug.vim" 'junegunn/vim-plug' 'plug.vim'
+$dir/install.sh nvm "$HOME/.zsh/nvm/nvm.sh" 'nvm-sh/nvm' 'nvm.sh'
+
+source "$HOME/.zsh/nvm/nvm.sh"
 
 # Antigen stuff
 source "$HOME/.zsh/antigen/antigen.zsh"
