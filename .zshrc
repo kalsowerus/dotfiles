@@ -13,6 +13,8 @@ if ! command -v bw >/dev/null 2>&1; then
     npm i -g @bitwarden/cli
 fi
 
+export K_COLOR_BR="01;33"
+
 # Antigen stuff
 source "$HOME/.zsh/antigen/antigen.zsh"
 
@@ -34,7 +36,6 @@ antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle Aloxaf/fzf-tab
 antigen bundle unixorn/autoupdate-antigen.zshplugin
 antigen bundle kalsowerus/k
-
 antigen bundle kalsowerus/zsh-bitwarden@develop
 
 antigen theme kalsowerus/kalsowerus.zsh-theme@develop
