@@ -30,6 +30,7 @@ check_installed() {
 
 install() {
     if ! check_installed; then
+        echo "Installing $name..."
         curl -sfLo "$install_path" --create-dirs "https://raw.githubusercontent.com/$repo/$branch/$file"
         mkdir -p $(dirname "$sha_file")
         get_sha > "$sha_file" 
