@@ -31,6 +31,6 @@ python3 install.py --all
 ## ZSH
 
 ```
-.zlogin
+~/.zlogin
 ```
 
