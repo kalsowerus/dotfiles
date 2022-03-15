@@ -35,7 +35,7 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle Aloxaf/fzf-tab
 antigen bundle unixorn/autoupdate-antigen.zshplugin
-antigen bundle kalsowerus/k
+antigen bundle kalsowerus/zsh-git-ls
 antigen bundle kalsowerus/zsh-bitwarden@develop
 
 antigen theme kalsowerus/kalsowerus.zsh-theme@develop
@@ -55,5 +55,5 @@ setopt auto_cd
 
 [[ -d "$HOME/bin" ]] && export PATH="$PATH:$HOME/bin"
 
-alias k='k -Ah --group-directories-first'
+alias l='git-ls -Ah --group-directories-first'
 
