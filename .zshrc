@@ -14,6 +14,7 @@ if ! command -v bw >/dev/null 2>&1; then
 fi
 
 export K_COLOR_BR="01;33"
+export LESS='-R --mouse --wheel-lines=2'
 
 (( ! ${+HOST_IP} )) && export HOST_IP=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null)
 (( ! ${+LIBGL_ALWAYS_INDIRECT} )) && export LIBGL_ALWAYS_INDIRECT=1
