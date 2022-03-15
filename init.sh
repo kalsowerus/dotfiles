@@ -7,7 +7,8 @@ sudo apt install xclip
 dir=$(realpath $(dirname "$0"))
 
 link() {
-	if [ -f "$HOME/$1" ] && [ ! -L "$HOME/$1" ]; then
+    local link_name="${2:-$HOME/$1}"
+	if [ -f "$link_name" ] && [ ! -L "$link_name" ]; then
 		echo -n "$1 exists. Overwrite? (y/N) "
 		read 'reply'
 
@@ -16,10 +17,12 @@ link() {
 		fi
 	fi
 
-	ln -sf "$dir/$1" "$HOME/$1"
+    mkdir -p $(dirname "$link_name")
+	ln -sf "$dir/$1" "$link_name"
 }
 
-link .gitconfig
+XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+link .gitconfig "$XDG_CONFIG_HOME/git/config"
 link .lesskey
 link .vimrc
 link .zshrc
