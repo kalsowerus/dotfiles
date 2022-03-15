@@ -51,7 +51,9 @@ setopt auto_cd
 (( ! ${+DISPLAY} )) && export DISPLAY=${HOST_IP}:0
 
 (( ! ${+JAVA_HOME} )) && export JAVA_HOME=/opt/jdk
-export PATH=$PATH:$JAVA_HOME/bin
+[[ -d "$JAVA_HOME" ]] && export PATH="$PATH:$JAVA_HOME/bin"
+
+[[ -d "$HOME/bin" ]] && export PATH="$PATH:$HOME/bin"
 
 alias k='k -Ah --group-directories-first'
 
