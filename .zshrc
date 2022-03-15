@@ -25,8 +25,6 @@ export LESS='-R --mouse --wheel-lines=2'
 
 [[ -d "$HOME/bin" ]] && export PATH="$PATH:$HOME/bin"
 
-alias l='git-ls -Ah --group-directories-first'
-
 # Antigen stuff
 source "$HOME/.zsh/antigen/antigen.zsh"
 
@@ -53,4 +51,6 @@ antigen bundle kalsowerus/zsh-bitwarden@develop
 antigen theme kalsowerus/kalsowerus.zsh-theme@develop
 
 antigen apply
+
+alias l='git-ls -Ah --group-directories-first'
 
