@@ -15,6 +15,17 @@ fi
 
 export K_COLOR_BR="01;33"
 
+(( ! ${+HOST_IP} )) && export HOST_IP=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null)
+(( ! ${+LIBGL_ALWAYS_INDIRECT} )) && export LIBGL_ALWAYS_INDIRECT=1
+(( ! ${+DISPLAY} )) && export DISPLAY=${HOST_IP}:0
+
+(( ! ${+JAVA_HOME} )) && export JAVA_HOME=/opt/jdk
+[[ -d "$JAVA_HOME" ]] && export PATH="$PATH:$JAVA_HOME/bin"
+
+[[ -d "$HOME/bin" ]] && export PATH="$PATH:$HOME/bin"
+
+alias l='git-ls -Ah --group-directories-first'
+
 # Antigen stuff
 source "$HOME/.zsh/antigen/antigen.zsh"
 
@@ -41,19 +52,4 @@ antigen bundle kalsowerus/zsh-bitwarden@develop
 antigen theme kalsowerus/kalsowerus.zsh-theme@develop
 
 antigen apply
-
-# other stuff
-
-setopt auto_cd
-
-(( ! ${+HOST_IP} )) && export HOST_IP=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null)
-(( ! ${+LIBGL_ALWAYS_INDIRECT} )) && export LIBGL_ALWAYS_INDIRECT=1
-(( ! ${+DISPLAY} )) && export DISPLAY=${HOST_IP}:0
-
-(( ! ${+JAVA_HOME} )) && export JAVA_HOME=/opt/jdk
-[[ -d "$JAVA_HOME" ]] && export PATH="$PATH:$JAVA_HOME/bin"
-
-[[ -d "$HOME/bin" ]] && export PATH="$PATH:$HOME/bin"
-
-alias l='git-ls -Ah --group-directories-first'
 
