@@ -1,14 +1,14 @@
-#!/bin/sh
+#!/bin/zsh
 
 sudo apt install jq
 sudo apt install fzf
 sudo apt install xclip
 
-dir=$(realpath $(dirname "$0"))
+dir=$(dirname $(readlink -e "${(%):-%x}"))
 
 link() {
     local link_name="${2:-$HOME/$1}"
-    if [ -f "$link_name" ] && [ ! -L "$link_name" ]; then
+    if [[ -f "$link_name" ]] && [[ ! -L "$link_name" ]]; then
         echo -n "$1 exists. Overwrite? (y/N) "
         read 'reply'
 

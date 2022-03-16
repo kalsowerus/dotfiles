@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 name="$1"
 install_path="$2"
@@ -12,18 +12,18 @@ get_sha() {
 }
 
 check_installed() {
-    if [ ! -e "$sha_file" ]; then
+    if [[ ! -e "$sha_file" ]]; then
         return 1
     fi
 
-    if [ ! -e "$install_path" ]; then
+    if [[ ! -e "$install_path" ]]; then
         return 1
     fi
 
     local installed_sha=$(cat "$sha_file")
     local remote_sha=$(get_sha)
 
-    if [ "$installed_sha" != "$remote_sha" ]; then
+    if [[ "$installed_sha" != "$remote_sha" ]]; then
         return 1
     fi
 }

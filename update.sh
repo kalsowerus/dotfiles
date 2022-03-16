@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/zsh
 
-dir=$(realpath $(dirname "$0"))
+dir=$(dirname $(readlink -e "${(%):-%x}"))
 
 git -C "$dir" pull
 $dir/init.sh
