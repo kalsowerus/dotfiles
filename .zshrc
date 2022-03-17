@@ -53,5 +53,5 @@ antigen theme kalsowerus/kalsowerus.zsh-theme@develop
 
 antigen apply
 
-alias l='git-ls -Ah --group-directories-first'
+alias l='git-ls -AFh --group-directories-first'
 
