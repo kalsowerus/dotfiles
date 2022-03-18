@@ -6,8 +6,11 @@ $dir/install.sh vim-plug "$HOME/.vim/autoload/plug.vim" 'junegunn/vim-plug' 'plu
 $dir/install.sh nvm "$HOME/.zsh/nvm/nvm.sh" 'nvm-sh/nvm' 'nvm.sh'
 
 source "$HOME/.zsh/nvm/nvm.sh"
-nvm install --lts >/dev/null 2>&1
-nvm use --lts >/dev/null
+
+if ! command -v npm >/dev/null 2>&1; then
+    nvm install --lts >/dev/null 2>&1
+    nvm use --lts >/dev/null
+fi
 
 if ! command -v bw >/dev/null 2>&1; then
     npm i -g @bitwarden/cli
