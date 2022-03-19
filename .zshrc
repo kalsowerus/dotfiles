@@ -18,9 +18,10 @@ fi
 
 export LESS='-R --mouse --wheel-lines=2'
 
-(( ! ${+HOST_IP} )) && export HOST_IP=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null)
-(( ! ${+LIBGL_ALWAYS_INDIRECT} )) && export LIBGL_ALWAYS_INDIRECT=1
-(( ! ${+DISPLAY} )) && export DISPLAY=${HOST_IP}:0
+if grep -qi microsoft /proc/version; then
+    (( ! ${+HOST_IP} )) && export HOST_IP=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null)
+    (( ! ${+DISPLAY} )) && export DISPLAY=${HOST_IP}:0
+fi
 
 (( ! ${+JAVA_HOME} )) && export JAVA_HOME=/opt/jdk
 [[ -d "$JAVA_HOME" ]] && export PATH="$PATH:$JAVA_HOME/bin"
