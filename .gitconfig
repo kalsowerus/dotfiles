@@ -4,3 +4,5 @@
 	helper = cache
 [init]
 	defaultBranch = master
+[commit]
+    gpgsign = true
