@@ -26,4 +26,6 @@ link .gitconfig "$XDG_CONFIG_HOME/git/config"
 link .lesskey
 link .vimrc
 link .zshrc
+link .ssh_config "$HOME/.ssh/config"
+link .ssh_git.conf "$HOME/.ssh/config.d/git.conf"
 

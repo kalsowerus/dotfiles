@@ -34,3 +34,9 @@ python3 install.py --all
 ~/.zlogin
 ```
 
+## SSH
+
+```
+~/.ssh/config.d/*.conf
+```
+
