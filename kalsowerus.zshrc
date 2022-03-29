@@ -1,4 +1,4 @@
-dir=$(dirname $(readlink "${(%):-%x}"))
+dir=$(dirname $(readlink -e "${(%):-%x}"))
 
 # Manual installations/updates
 $dir/install.sh antigen "$HOME/.zsh/antigen/antigen.zsh" 'zsh-users/antigen' 'bin/antigen.zsh'
