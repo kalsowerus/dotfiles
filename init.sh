@@ -1,8 +1,14 @@
 #!/bin/zsh
 
-sudo apt install jq
-sudo apt install fzf
-sudo apt install xclip
+if ! command -v jq >/dev/null 2>&1; then
+    sudo apt install jq
+fi
+if ! command -v fzf >/dev/null 2>&1; then
+    sudo apt install fzf
+fi
+if ! command -v xclip >/dev/null 2>&1; then
+    sudo apt install xclip
+fi
 
 dir=$(dirname $(readlink -e "${(%):-%x}"))
 
@@ -21,11 +27,28 @@ link() {
     ln -sf "$dir/$1" "$link_name"
 }
 
-XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-link .gitconfig "$XDG_CONFIG_HOME/git/config"
 link .lesskey
-link .vimrc
-link .zshrc
-link .ssh_config "$HOME/.ssh/config"
-link .ssh_git.conf "$HOME/.ssh/config.d/git.conf"
+
+ZSHRC_INCLUDE="source $HOME/dotfiles/kalsowerus.zshrc"
+ZSHRC_FILE="$HOME/.zshrc"
+if ! grep "^$ZSHRC_INCLUDE$" "$ZSHRC_FILE" >/dev/null 2>&1; then
+    echo "$ZSHRC_INCLUDE" >> "$ZSHRC_FILE"
+fi
+
+GIT_INCLUDE_PATH="$HOME/dotfiles/kalsowerus.gitconfig"
+if command -v git >/dev/null 2>&1 && ! git config --global --list | grep "path=$GIT_INCLUDE_PATH$" >/dev/null; then
+    git config --global --add include.path "$GIT_INCLUDE_PATH" 
+fi
+
+SSH_INCLUDE="Include $HOME/dotfiles/kalsowerus.ssh.conf"
+SSH_CONFIG_FILE="$HOME/.ssh/config"
+if ! grep "^$SSH_INCLUDE$" "$SSH_CONFIG_FILE" >/dev/null 2>&1; then
+    sed -i "1s:^:$SSH_INCLUDE\n:" "$SSH_CONFIG_FILE"
+fi
+
+VIMRC_INCLUDE="source $HOME/dotfiles/kalsowerus.vimrc"
+VIMRC_FILE="$HOME/.vimrc"
+if ! grep "^$VIMRC_INCLUDE$" "$VIMRC_FILE" >/dev/null 2>&1; then
+    echo "$VIMRC_INCLUDE" >> "$VIMRC_FILE"
+fi
 

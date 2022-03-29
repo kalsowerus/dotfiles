@@ -1,0 +1,9 @@
+[core]
+    editor = vi
+[credential]
+    helper = cache
+[init]
+    defaultBranch = master
+[commit]
+    gpgsign = true
+
