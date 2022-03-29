@@ -20,23 +20,3 @@ cd ~/.vim/plugged/YouCompleteMe
 python3 install.py --all
 ```
 
-# Custom config files
-
-## Git
-
-```
-~/.gitconfig
-```
-
-## ZSH
-
-```
-~/.zlogin
-```
-
-## SSH
-
-```
-~/.ssh/config.d/*.conf
-```
-
