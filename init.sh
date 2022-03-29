@@ -36,7 +36,7 @@ if ! grep "^$ZSHRC_INCLUDE$" "$ZSHRC_FILE" >/dev/null 2>&1; then
 fi
 
 GIT_INCLUDE_PATH="$dir/kalsowerus.gitconfig"
-if command -v git >/dev/null 2>&1 && ! git config --global --list | grep "path=$GIT_INCLUDE_PATH$" >/dev/null; then
+if command -v git >/dev/null 2>&1 && ! git config --global --list 2>/dev/null | grep "path=$GIT_INCLUDE_PATH$" >/dev/null; then
     git config --global --add include.path "$GIT_INCLUDE_PATH" 
 fi
 
