@@ -43,7 +43,11 @@ fi
 SSH_INCLUDE="Include $dir/kalsowerus.ssh.conf"
 SSH_CONFIG_FILE="$HOME/.ssh/config"
 if ! grep "^$SSH_INCLUDE$" "$SSH_CONFIG_FILE" >/dev/null 2>&1; then
-    sed -i "1s:^:$SSH_INCLUDE\n:" "$SSH_CONFIG_FILE"
+    if [[ -e "$SSH_CONFIG_FILE" ]]; then
+    	sed -i "1s:^:$SSH_INCLUDE\n:" "$SSH_CONFIG_FILE"
+    else
+        echo "$SSH_INCLUDE" > "$SSH_CONFIG_FILE"
+    fi
 fi
 
 VIMRC_INCLUDE="source $dir/kalsowerus.vimrc"
