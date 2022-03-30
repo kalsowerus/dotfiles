@@ -1,41 +1,58 @@
 #!/bin/zsh
 
-name="$1"
-install_path="$2"
-repo="$3"
-file="$4"
-branch="${5:-master}"
-sha_file="$HOME/.zsh/$name/sha"
+if ! command -v jq >/dev/null 2>&1; then
+    sudo apt install jq
+fi
+if ! command -v fzf >/dev/null 2>&1; then
+    sudo apt install fzf
+fi
+if ! command -v xclip >/dev/null 2>&1; then
+    sudo apt install xclip
+fi
 
-get_sha() {
-    echo $(curl -sH 'Accept: application/vnd.github.v3.sha' "https://api.github.com/repos/$repo/commits/$branch?per_page=1")
+dir=$(dirname $(readlink -e "${(%):-%x}"))
+
+link() {
+    local link_name="${2:-$HOME/$1}"
+    if [[ -f "$link_name" ]] && [[ ! -L "$link_name" ]]; then
+        echo -n "$1 exists. Overwrite? (y/N) "
+        read 'reply'
+
+        if [ "$reply" != 'y' ]; then
+            return
+        fi
+    fi
+
+    mkdir -p $(dirname "$link_name")
+    ln -sf "$dir/$1" "$link_name"
 }
 
-check_installed() {
-    if [[ ! -e "$sha_file" ]]; then
-        return 1
+link .lesskey
+
+ZSHRC_INCLUDE="source $dir/kalsowerus.zshrc"
+ZSHRC_FILE="$HOME/.zshrc"
+if ! grep "^$ZSHRC_INCLUDE$" "$ZSHRC_FILE" >/dev/null 2>&1; then
+    echo "$ZSHRC_INCLUDE" >> "$ZSHRC_FILE"
+fi
+
+GIT_INCLUDE_PATH="$dir/kalsowerus.gitconfig"
+if command -v git >/dev/null 2>&1 && ! git config --global --list 2>/dev/null | grep "path=$GIT_INCLUDE_PATH$" >/dev/null; then
+    git config --global --add include.path "$GIT_INCLUDE_PATH" 
+fi
+
+SSH_INCLUDE="Include $dir/kalsowerus.ssh.conf"
+SSH_CONFIG_FILE="$HOME/.ssh/config"
+if ! grep "^$SSH_INCLUDE$" "$SSH_CONFIG_FILE" >/dev/null 2>&1; then
+    if [[ -e "$SSH_CONFIG_FILE" ]]; then
+    	sed -i "1s:^:$SSH_INCLUDE\n:" "$SSH_CONFIG_FILE"
+    else
+        echo "$SSH_INCLUDE" > "$SSH_CONFIG_FILE"
     fi
+fi
 
-    if [[ ! -e "$install_path" ]]; then
-        return 1
-    fi
-
-    local installed_sha=$(cat "$sha_file")
-    local remote_sha=$(get_sha)
-
-    if [[ "$installed_sha" != "$remote_sha" ]]; then
-        return 1
-    fi
-}
-
-install() {
-    if ! check_installed; then
-        echo "Installing $name..."
-        curl -sfLo "$install_path" --create-dirs "https://raw.githubusercontent.com/$repo/$branch/$file"
-        mkdir -p $(dirname "$sha_file")
-        get_sha > "$sha_file" 
-    fi
-}
-
-install
+VIMRC_INCLUDE="source $dir/kalsowerus.vimrc"
+VIMRC_FILE="$HOME/.vimrc"
+if ! grep "^$VIMRC_INCLUDE$" "$VIMRC_FILE" >/dev/null 2>&1; then
+    echo "$VIMRC_INCLUDE" >> "$VIMRC_FILE"
+fi
 
