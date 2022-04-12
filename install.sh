@@ -12,6 +12,8 @@ fi
 
 dir=$(dirname $(readlink -e "${(%):-%x}"))
 
+mkdir -p "$HOME/.ssh"
+
 link() {
     local link_name="${2:-$HOME/$1}"
     if [[ -f "$link_name" ]] && [[ ! -L "$link_name" ]]; then
