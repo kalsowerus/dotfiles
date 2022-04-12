@@ -8,7 +8,14 @@ branch="${5:-master}"
 sha_file="$HOME/.zsh/$name/sha"
 
 get_sha() {
-    echo $(curl -sH 'Accept: application/vnd.github.v3.sha' "https://api.github.com/repos/$repo/commits/$branch?per_page=1")
+    local response
+    response=$(curl -sH 'Accept: application/vnd.github.v3.sha' "https://api.github.com/repos/$repo/commits/$branch?per_page=1")
+    if (( $? == 0 )); then
+        echo "$response"
+        return 0
+    else
+        return 1
+    fi
 }
 
 check_installed() {
@@ -23,7 +30,7 @@ check_installed() {
     local installed_sha=$(cat "$sha_file")
     local remote_sha=$(get_sha)
 
-    if [[ "$installed_sha" != "$remote_sha" ]]; then
+    if [[ -n "$remote_sha" ]] && [[ "$installed_sha" != "$remote_sha" ]]; then
         return 1
     fi
 }
