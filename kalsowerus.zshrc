@@ -1,9 +1,8 @@
 dir=$(dirname $(readlink -e "${(%):-%x}"))
 
-# Manual installations/updates
-$dir/install_file.sh antigen "$HOME/.zsh/antigen/antigen.zsh" 'zsh-users/antigen' 'bin/antigen.zsh'
-$dir/install_file.sh vim-plug "$HOME/.vim/autoload/plug.vim" 'junegunn/vim-plug' 'plug.vim'
-$dir/install_file.sh nvm "$HOME/.zsh/nvm/nvm.sh" 'nvm-sh/nvm' 'nvm.sh'
+git -C "${HOME}/.zsh/antigen" pull >/dev/null
+git -C "${HOME}/.zsh/nvm" pull >/dev/null
+git -C "${HOME}/.zsh/vim-plug" pull >/dev/null
 
 source "$HOME/.zsh/nvm/nvm.sh"
 
