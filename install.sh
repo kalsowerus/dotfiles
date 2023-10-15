@@ -51,16 +51,6 @@ if command -v git >/dev/null 2>&1 && ! git config --global --list 2>/dev/null | 
     git config --global --add include.path "$GIT_INCLUDE_PATH" 
 fi
 
-SSH_INCLUDE="Include $dir/kalsowerus.ssh.conf"
-SSH_CONFIG_FILE="$HOME/.ssh/config"
-if ! grep "^$SSH_INCLUDE$" "$SSH_CONFIG_FILE" >/dev/null 2>&1; then
-    if [[ -e "$SSH_CONFIG_FILE" ]]; then
-    	sed -i "1s:^:$SSH_INCLUDE\n:" "$SSH_CONFIG_FILE"
-    else
-        echo "$SSH_INCLUDE" > "$SSH_CONFIG_FILE"
-    fi
-fi
-
 VIMRC_INCLUDE="source $dir/kalsowerus.vimrc"
 VIMRC_FILE="$HOME/.vimrc"
 if ! grep "^$VIMRC_INCLUDE$" "$VIMRC_FILE" >/dev/null 2>&1; then
