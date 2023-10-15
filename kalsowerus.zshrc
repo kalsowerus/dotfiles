@@ -58,3 +58,14 @@ antigen apply
 
 alias l='git-ls -AFh --group-directories-first'
 
+md2pdf() {
+    if [[ "$#" -eq 0 ]]; then
+        echo "Usage: ${0} <input-file> [<output-filename>]"
+        return
+    fi
+
+    local filename
+    filename="${2:=${1%.md}}"
+    cat "$1" | sed -E 's/<img.*?src="(.*?)".*?>/![](\1)/g' | pandoc -o "/downloads/${filename%.pdf}.pdf" -V papersize:a4 -V geometry:margin=2cm
+}
+
