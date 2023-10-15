@@ -34,12 +34,6 @@ link() {
 
 link .lesskey
 
-LATEX_PATH="${HOME}/texmf/tex/latex"
-mkdir -p "${LATEX_PATH}"
-if [[ ! -e "${LATEX_PATH}/cheatsheet.cls" ]]; then
-    ln -s "${dir}/cheatsheet.cls" "${LATEX_PATH}/cheatsheet.cls"
-fi
-
 ZSHRC_INCLUDE="source $dir/kalsowerus.zshrc"
 ZSHRC_FILE="$HOME/.zshrc"
 if ! grep "^$ZSHRC_INCLUDE$" "$ZSHRC_FILE" >/dev/null 2>&1; then
